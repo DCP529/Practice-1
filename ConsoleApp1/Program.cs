@@ -5,41 +5,35 @@ namespace ConsoleApp1
 {
     class Program
     {
-
-        public static List<Person> pers = new List<Person>();
         static void Main(string[] args)
         {
+            var person1 = new Person("Иван", 1);
+            var account1 = new Account(150, new Rub());
 
-            Person person1 = new Person("Vova", 15_000, 1);
-            Person person2 = new Person("Kostia", 15_000, 2);
-            Person person3 = new Person("Nikita", 15_000, 4);
-            Person person4 = new Person("Nikita", 15_000, 4);
+            var person2 = new Person("Алексей", 2);
+            var account2 = new Account(100, new Ua());
 
+            var person3 = new Person("Генадий", 3);
+            var account3 = new Account(200, new Rub());
 
-            pers.AddRange(new Person[] { person1, person2 });
-            Adds(person2);
-            Adds(person3);
+            Dictionary<Person, Account> persons = new Dictionary<Person, Account>()
+            {
+                { person1, account1},
+                { person2, account2},
+                { person3, account3}
+            };
 
-            bool result = person4.Equals(person2); 
+            var convert = Converter(15_000, new Rub(), new Ua());
 
             Console.ReadLine();
 
-            //релизовать хранилище клиентов
-            //имя счет id
-            //при попытке добаления проверить его наличие в списке
         }
-
-        public static void Adds(Person person)
+        public static decimal Converter(decimal money, Currency currencyType1, Currency currencyType2)
         {
-            if (!pers.Contains(person))
-            {
-                pers.Add(person); 
-                Console.WriteLine("Добавление произошло успешно");
-            }
-            else
-            {
-                Console.WriteLine("Такой человек уже есть");
-            }
+
+            var result = (money / currencyType1.Price) * currencyType2.Price;
+
+            return result;
         }
     }
 }

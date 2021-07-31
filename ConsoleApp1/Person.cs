@@ -6,14 +6,12 @@ namespace ConsoleApp1
 {
     public class Person
     {
-        string Name { get; set; }
-        decimal Dollar { get; set; }
+        public string Name { get; set; }
         int Id { get; set; }
 
-        public Person(string name, decimal dollar, int id)
+        public Person(string name, int id)
         {
             Name = name;
-            Dollar = dollar;
             Id = id;
         }
 
@@ -30,8 +28,14 @@ namespace ConsoleApp1
             {
                 return false;
             }
-            return result.Name == Name && result.Dollar == Dollar && result.Id == Id;
-        }        
+            return result.Name == Name &&  result.Id == Id;
+        }
+
+        public override int GetHashCode()
+        {
+            int result = Name.GetHashCode() + Id.GetHashCode();
+            return result;
+        }
 
     }
 }
