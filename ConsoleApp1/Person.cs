@@ -20,6 +20,7 @@ namespace ConsoleApp1
         public override bool Equals(object obj)
         {
             Person result = (Person)obj;
+
             if (obj == null)
             {
                 return false;
